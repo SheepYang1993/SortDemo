@@ -14,13 +14,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_stop"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="暂停"/>
-
-        <Button
             android:id="@+id/btn_restart"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -28,9 +21,18 @@
             android:text="重置"/>
 
         <Button
+            android:id="@+id/btn_stop"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="暂停"/>
+
+        <Button
+            android:id="@+id/btn_resume"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="继续"/>
 
         <Button
             android:layout_width="0dp"

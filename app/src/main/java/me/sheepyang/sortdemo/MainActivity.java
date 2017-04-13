@@ -30,11 +30,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_stop:
                 mSortView.stop();
                 break;
+            case R.id.btn_resume:
+                mSortView.resume();
+                break;
             case R.id.btn_restart:
                 mSortView.restart();
                 break;
             case R.id.btn_bubble:
-                ToastUtils.showShortToast("正在进行冒泡排序...");
                 mSortView.bubbleSort();
                 break;
             default:

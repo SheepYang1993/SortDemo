@@ -4,13 +4,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.blankj.utilcode.util.ToastUtils;
+import com.blankj.utilcode.util.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,26 +23,8 @@ public class SortView extends View {
     private Paint mPaint = new Paint();
     private Paint mTextPaint = new Paint();
     private Rect mBounds = new Rect();
-    private List<Integer> mTempList = new ArrayList<>();
-    private Runnable mBubbleRunnable = new Runnable() {
-        @Override
-        public void run() {
-            ToastUtils.showShortToast("sasasas" + System.currentTimeMillis());
-
-            for (int i = 0; i < mList.size(); i++) {
-
-            }
-
-
-            mHandler.postDelayed(mBubbleRunnable, 1000);
-        }
-    };
-    private static Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-        }
-    };
+    private int mIndexI, mTempInt, mCount = 1;
+    private boolean mIsSorting;
 
     public SortView(Context context) {
         this(context, null);
@@ -78,13 +58,13 @@ public class SortView extends View {
         mList.add(9);
         mList.add(4);
         mList.add(5);
-        mList.add(6);
-        mList.add(8);
-        mList.add(3);
-        mList.add(2);
-        mList.add(7);
-        mList.add(10);
-        mList.add(1);
+//        mList.add(6);
+//        mList.add(8);
+//        mList.add(3);
+//        mList.add(2);
+//        mList.add(7);
+//        mList.add(10);
+//        mList.add(1);
     }
 
     @Override
@@ -109,21 +89,37 @@ public class SortView extends View {
         }
     }
 
+    /**
+     * 冒泡排序
+     */
     public void bubbleSort() {
-        mHandler.removeCallbacksAndMessages(null);
-        mTempList.clear();
-        for (int i = 0; i < mList.size(); i++) {
-            mTempList.add(mList.get(i));
+        for (int i = mIndexI; i < mList.size(); i++) {
+            for (int j = mIndexI; j < mList.size(); j++) {
+                LogUtils.i(mList.toArray()[0]);
+                int a = mList.get(i);
+                int b = mList.get(j);
+                if (a < b) {
+                    mTempInt = a;
+                    mList.set(i, b);
+                    mList.set(j, mTempInt);
+                    mCount++;
+                    invalidate();
+                }
+            }
         }
-        mHandler.postDelayed(mBubbleRunnable, 3000);
+    }
+
+    public void resume() {
+        bubbleSort();
     }
 
     public void stop() {
-        mHandler.removeCallbacksAndMessages(null);
+        mIsSorting = false;
     }
 
     public void restart() {
-        mHandler.removeCallbacksAndMessages(null);
+        mIndexI = 0;
+        mCount = 1;
         mList.clear();
         mList.add(9);
         mList.add(4);
